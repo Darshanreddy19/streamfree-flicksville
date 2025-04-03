@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import MovieRow from "@/components/MovieRow";
 import Footer from "@/components/Footer";
 import { getMovie, getMoviesByGenre, type Movie } from "@/lib/api";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/lib/toast";
 
 const MovieDetailPage = () => {
   const { id } = useParams<{ id: string }>();

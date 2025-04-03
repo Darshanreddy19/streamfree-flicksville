@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2, VolumeX, Maximize, ArrowLeft, Rewind, FastForward } from "lucide-react";
 import { Link } from "react-router-dom";
 import { type Movie } from "@/lib/api";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/lib/toast";
 
 interface VideoPlayerProps {
   movie: Movie;
