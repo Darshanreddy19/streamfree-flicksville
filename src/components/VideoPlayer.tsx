@@ -11,7 +11,7 @@ interface VideoPlayerProps {
 
 const VideoPlayer = ({ movie }: VideoPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(false); // Set initial mute state to false
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -47,7 +47,22 @@ const VideoPlayer = ({ movie }: VideoPlayerProps) => {
       // We use a Promise because play() returns a promise
       videoElement.play().catch(error => {
         console.error("Error playing video:", error);
-        setIsPlaying(false);
+        // If autoplay fails, try again without sound and then unmute
+        if (error.name === "NotAllowedError") {
+          videoElement.muted = true;
+          videoElement.play().then(() => {
+            // After successful play, prompt user to unmute
+            toast("Click to unmute", {
+              description: "Your browser blocked autoplay with sound. Click the volume icon to unmute.",
+              duration: 5000,
+            });
+          }).catch(err => {
+            console.error("Failed to play even with mute:", err);
+            setIsPlaying(false);
+          });
+        } else {
+          setIsPlaying(false);
+        }
       });
     } else {
       videoElement.pause();

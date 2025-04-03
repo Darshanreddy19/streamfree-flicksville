@@ -22,6 +22,12 @@ const WatchPage = () => {
           
           // Update page title with movie name
           document.title = `${movieData.title} - Streaming Now`;
+          
+          // Notify user that video will autoplay
+          toast.success("Video will autoplay", {
+            description: "Your video will automatically begin playing with sound.",
+            duration: 2000,
+          });
         } else {
           toast.error("Movie not found", {
             description: "We couldn't find the movie you're looking for.",
