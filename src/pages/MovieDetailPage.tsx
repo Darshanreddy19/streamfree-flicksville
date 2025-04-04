@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import MovieRow from "@/components/MovieRow";
 import Footer from "@/components/Footer";
-import { getMovie, getMoviesByGenre, type Movie } from "@/lib/api";
+import { getMovie, getMoviesByGenre, getLatestMovies, type Movie } from "@/lib/api";
 import { toast } from "@/lib/toast";
 
 const MovieDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [similarMovies, setSimilarMovies] = useState<Movie[]>([]);
+  const [latestMovies, setLatestMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   
@@ -33,6 +34,10 @@ const MovieDetailPage = () => {
             const similar = getMoviesByGenre(movieData.genre[0]).filter(m => m.id !== id);
             setSimilarMovies(similar);
           }
+
+          // Get latest movies 
+          const latest = getLatestMovies().filter(m => m.id !== id);
+          setLatestMovies(latest);
         } else {
           toast.error("Movie not found");
           navigate("/browse");
@@ -173,6 +178,13 @@ const MovieDetailPage = () => {
           {similarMovies.length > 0 && (
             <div className="mt-12">
               <MovieRow title="More Like This" movies={similarMovies} />
+            </div>
+          )}
+
+          {/* Latest Movies */}
+          {latestMovies.length > 0 && (
+            <div className="mt-12">
+              <MovieRow title="Latest Releases" movies={latestMovies} />
             </div>
           )}
         </div>

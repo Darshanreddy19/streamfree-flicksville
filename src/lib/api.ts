@@ -1,4 +1,3 @@
-
 // Mock data for our streaming service
 // In a real app, this would come from an API
 
@@ -12,6 +11,7 @@ export interface Movie {
   duration: string;
   rating: string;
   videoUrl: string; // In a real app, this would be a URL to the actual video
+  isLatest?: boolean; // Flag to identify the latest movies
 }
 
 export interface Genre {
@@ -64,7 +64,8 @@ export const movies: Movie[] = [
     year: 2014,
     duration: "2h 49m",
     rating: "PG-13",
-    videoUrl: "https://example.com/videos/interstellar"
+    videoUrl: "https://example.com/videos/interstellar",
+    isLatest: true
   },
   {
     id: "4",
@@ -164,6 +165,42 @@ export const movies: Movie[] = [
     duration: "2h 55m",
     rating: "R",
     videoUrl: "https://example.com/videos/godfather"
+  },
+  {
+    id: "13",
+    title: "Dune: Part Two",
+    description: "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+    thumbnailUrl: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+    genre: ["action", "adventure", "sci-fi"],
+    year: 2024,
+    duration: "2h 46m",
+    rating: "PG-13",
+    videoUrl: "https://example.com/videos/dune-2",
+    isLatest: true
+  },
+  {
+    id: "14",
+    title: "The Fall Guy",
+    description: "A stuntman is drawn back into a dangerous career as a bounty hunter when he has to track down a missing movie star.",
+    thumbnailUrl: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
+    genre: ["action", "comedy"],
+    year: 2024,
+    duration: "2h 6m",
+    rating: "PG-13",
+    videoUrl: "https://example.com/videos/fall-guy",
+    isLatest: true
+  },
+  {
+    id: "15",
+    title: "Godzilla x Kong: The New Empire",
+    description: "Two legendary Titans, Godzilla and Kong, clash in an epic battle as a terrifying new threat emerges from the depths of Hollow Earth.",
+    thumbnailUrl: "https://images.unsplash.com/photo-1721322800607-8c38375eef04",
+    genre: ["action", "adventure", "sci-fi"],
+    year: 2024,
+    duration: "1h 55m",
+    rating: "PG-13",
+    videoUrl: "https://example.com/videos/godzilla-kong",
+    isLatest: true
   }
 ];
 
@@ -195,4 +232,9 @@ export function searchMovies(query: string): Movie[] {
     movie.title.toLowerCase().includes(query) || 
     movie.description.toLowerCase().includes(query)
   );
+}
+
+// New function to get latest movies
+export function getLatestMovies(): Movie[] {
+  return movies.filter(movie => movie.isLatest === true);
 }

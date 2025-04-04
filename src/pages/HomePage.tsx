@@ -4,13 +4,14 @@ import Navbar from "@/components/Navbar";
 import FeaturedMovie from "@/components/FeaturedMovie";
 import MovieRow from "@/components/MovieRow";
 import Footer from "@/components/Footer";
-import { getMovies, getMoviesByGenre, getFeaturedMovie, type Movie } from "@/lib/api";
+import { getMovies, getMoviesByGenre, getFeaturedMovie, getLatestMovies, type Movie } from "@/lib/api";
 
 const HomePage = () => {
   const [featuredMovie, setFeaturedMovie] = useState<Movie | null>(null);
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
   const [actionMovies, setActionMovies] = useState<Movie[]>([]);
   const [dramaMovies, setDramaMovies] = useState<Movie[]>([]);
+  const [latestMovies, setLatestMovies] = useState<Movie[]>([]);
   
   useEffect(() => {
     // Get featured movie
@@ -27,6 +28,10 @@ const HomePage = () => {
     
     const drama = getMoviesByGenre("drama");
     setDramaMovies(drama);
+
+    // Get latest movies
+    const latest = getLatestMovies();
+    setLatestMovies(latest);
   }, []);
   
   if (!featuredMovie) {
@@ -41,6 +46,9 @@ const HomePage = () => {
         <FeaturedMovie movie={featuredMovie} />
         
         <div className="content-container -mt-12 relative z-20">
+          {latestMovies.length > 0 && (
+            <MovieRow title="Latest Releases" movies={latestMovies} />
+          )}
           <MovieRow title="Trending Now" movies={trendingMovies} />
           <MovieRow title="Action Movies" movies={actionMovies} />
           <MovieRow title="Drama Movies" movies={dramaMovies} />
