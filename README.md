@@ -10,7 +10,7 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f82e954f-238a-4375-a334-5da9fdf07abe) and start prompting.
+Simply visit the [https://preview--streamfree-flicksville.lovable.app/) and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
