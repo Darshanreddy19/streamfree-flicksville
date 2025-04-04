@@ -2,8 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/f82e954f-238a-4375-a334-5da9fdf07abe
-
+**URL**: https://preview--streamfree-flicksville.lovable.app/
 ## How can I edit this code?
 
 There are several ways of editing your application.
